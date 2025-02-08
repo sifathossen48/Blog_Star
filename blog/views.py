@@ -6,6 +6,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.response import Response
 from blog.filters import NewsItemFilter
 from blog.models import AboutInfo,NewsItem, Slider, Testimonial
+from blog.pagination import CustomPagination
 from blog.serializers import AboutInfoSerializer, ContactFormSerializer, NewsItemDetailSerializer, NewsItemSerializer, SliderSerializer, TestimonialSerializer
 
 # Create your views here.
@@ -18,6 +19,7 @@ class NewsItemListView(generics.ListAPIView):
     serializer_class = NewsItemSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_class = NewsItemFilter
+    pagination_class = CustomPagination
     
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
