@@ -1,11 +1,12 @@
 from django.urls import path
 
-from blog.views import AboutInfoView, ContactFormCreateView, NewsItemListView, SliderListView, TestimonialView
+from blog.views import AboutInfoView, ContactFormCreateView, NewsItemDetailView, NewsItemListView, SliderListView, TestimonialView
 
 
 urlpatterns = [
     path('sliders/', SliderListView.as_view(), name='slider-list'),
     path('news/', NewsItemListView.as_view(), name='news-list'),
+    path('news/<slug:slug>/', NewsItemDetailView.as_view(), name='news-details'),
     # path('news/search/', NewsItemSearchView.as_view(), name='blog-search'),
     path('about/', AboutInfoView.as_view(), name='about-info'),
     path('testimonials/', TestimonialView.as_view(), name='testimonial-list'),

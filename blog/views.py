@@ -6,7 +6,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.response import Response
 from blog.filters import NewsItemFilter
 from blog.models import AboutInfo,NewsItem, Slider, Testimonial
-from blog.serializers import AboutInfoSerializer, ContactFormSerializer, NewsItemSerializer, SliderSerializer, TestimonialSerializer
+from blog.serializers import AboutInfoSerializer, ContactFormSerializer, NewsItemDetailSerializer, NewsItemSerializer, SliderSerializer, TestimonialSerializer
 
 # Create your views here.
 class SliderListView(generics.ListAPIView):
@@ -37,6 +37,11 @@ class NewsItemListView(generics.ListAPIView):
         # If no pagination is used, return the entire queryset data
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
+
+class NewsItemDetailView(generics.RetrieveAPIView):
+    queryset = NewsItem.objects.all()
+    serializer_class = NewsItemDetailSerializer
+    lookup_field = 'slug'
 
 # class NewsItemSearchView(generics.ListAPIView):
 #     queryset = NewsItem.objects.all()
